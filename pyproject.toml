@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "Visual-AId"
+version = "0.1.0"
+description = "Backend service for local image + voice analysis with chat"
+authors = ["chatgpt"]
+packages = [{include = "backend"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+fastapi = "^0.110"
+uvicorn = "^0.29"
+requests = "^2.31"
+pillow = "^10.2"
+python-multipart = "^0.0.9"
+opencv-python = "^4.9"
+aiofiles = "^23.2"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

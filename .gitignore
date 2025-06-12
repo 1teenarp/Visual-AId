@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+*.egg
+*.pkl
+
+# Environment
+.env
+.venv/
+.envrc
+
+# Poetry
+poetry.lock
+
+# macOS
+.DS_Store
+
+# Editor
+.vscode/
+.idea/
+
+# Images / cache
+*.log
+*.jpg
+*.png
+*.mp4
