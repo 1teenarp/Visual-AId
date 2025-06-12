@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Visual-AId</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <h1>Visual-AId</h1>
+
+  <div class="input-section">
+    <label for="prompt">Prompt:</label>
+    <input type="text" id="prompt" placeholder="What do you want to ask?" />
+
+    <div class="upload-section">
+      <label for="imageInput">Upload an image:</label>
+      <input type="file" id="imageInput" accept="image/*" />
+      <button onclick="submitImage()">Analyze Image</button>
+    </div>
+
+    <div class="camera-section">
+      <video id="webcam" autoplay playsinline></video>
+      <canvas id="snapshot" style="display: none;"></canvas>
+      <img id="frozenFrame" style="display: none;" />
+
+      <div class="camera-buttons">
+        <button id="startCam" onclick="toggleCamera()">Start Camera</button>
+        <button id="captureBtn" onclick="captureWebcam()" disabled>Capture & Analyze</button>
+      </div>
+    </div>
+
+    <div id="loading" class="spinner" style="display: none;"></div>
+  </div>
+
+  <div class="output-section">
+    <h2>Model Response:</h2>
+    <pre id="response"></pre>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
