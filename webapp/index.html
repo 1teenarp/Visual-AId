@@ -28,7 +28,7 @@
         <button id="startCam" onclick="toggleCamera()">Start Camera</button>
         <button id="captureBtn" onclick="captureWebcam()" disabled>Capture & Analyze</button>
       </div>
-    </div>
+    </div>¬
 
     <div id="loading" class="spinner" style="display: none;"></div>
   </div>
@@ -36,6 +36,17 @@
   <div class="output-section">
     <h2>Model Response:</h2>
     <pre id="response"></pre>
+    <div id="conversation">
+    <h3>Conversation History</h3>
+    <div id="chatHistory"></div>
+
+    <div class="followup">
+        <input type="text" id="followupInput" placeholder="Ask a follow-up..." />
+        <button onclick="sendFollowup()">Send</button>
+    </div>
+    <div id="chatResponse">
+    </div>
+    </div>
   </div>
 
   <script src="script.js"></script>

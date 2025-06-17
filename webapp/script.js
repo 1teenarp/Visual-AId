@@ -1,5 +1,6 @@
 let stream = null;
 let isCameraOn = false;
+const clientId = Math.random().toString(36).substring(2, 15);
 
 const webcam = document.getElementById("webcam");
 const frozenFrame = document.getElementById("frozenFrame");
@@ -78,7 +79,8 @@ async function captureWebcam() {
       },
       body: JSON.stringify({
         image_base64: base64Data,
-        prompt: promptInput.value || "What do you see?"
+        prompt: promptInput.value || "What do you see?",
+        client_id: clientId
       })
     });
 
@@ -109,6 +111,7 @@ async function submitImage() {
   const formData = new FormData();
   formData.append("file", file);
   formData.append("prompt", promptInput.value || "Describe this image");
+  formData.append("client_id", clientId);
 
   try {
     const res = await fetch("http://localhost:8000/analyze-image", {
@@ -123,4 +126,36 @@ async function submitImage() {
   } finally {
     hideLoading();
   }
+}
+
+
+async function sendFollowup() {
+  const prompt = document.getElementById("followupInput").value.trim();
+  if (!prompt) return;
+
+  showLoading();
+
+  const res = await fetch("http://localhost:8000/chat", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      prompt: prompt,
+      client_id: clientId
+    })
+  });
+
+  const data = await res.json();
+  hideLoading();
+  renderHistory(data.history);
+}
+
+function renderHistory(history) {
+  const container = document.getElementById("chatResponse");
+  container.innerHTML = "";
+  history.forEach(item => {
+    const el = document.createElement("div");
+    el.className = `msg ${item.role}`;
+    el.textContent = `${item.role}: ${item.message}`;
+    container.appendChild(el);
+  });
 }
